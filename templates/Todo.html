@@ -27,20 +27,49 @@
             flex-direction: column;
             background-color: #ebefef;
         }
-        .container{
+
+        
+         .container{
             background-color: beige;
             display: flex;
             flex-direction: column;
-            
-            
             padding: 3rem;
            
-           
         }
+
+        .cont2 {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card {
+            width: 90vw;
+            height: 10vh;
+            border: 2px solid black;
+            background-color: #ebefef;
+            
+        }
+        ul {
+            width: 180px;
+        }
+        .card>ul>li {
+            
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 80vw;
+            height: 100%;
+        }
+        
+         
         .cont1>form>input[type=text] {
             width: 30vw;
             height: 30px;
             border: none;
+            
         }
         .button1>button{
             
@@ -52,78 +81,47 @@
             font-weight: bold;
         }
 
-        ul {
-            margin-top: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        
 
-        li {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            border-bottom: 0.5px solid black;
-            text-transform: uppercase;
-            color: black;
-            font-weight: bold;
-            font-family:Arial, Helvetica, sans-serif;
-        }
+        
 
-        .button{
-            
-            padding-top:1rem ;
-            border: 1px solid black;
-            text-align: center;
-            width: 70px;
-            height: 30px;
-            background-color: red;
-            display: block;
-            
-        }
-
-        .button>a{
-            display: block;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .complete{
-            
-            padding-top:1rem ;
-            border: 1px solid #4BB543;
-            text-align: center;
-            width: 70px;
-            height: 30px;
-            background-color: #4BB543;
-            display: block;
-            
-        }
-
-        .complete>a{
-            display: block;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            font-size: 14px;
-        }
+        
         
 
             .cont1 {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
+                
             }
 
             .True {
                 text-decoration: line-through;
             }
-            .btn {
-                display: flex;
-                justify-content: space-between;
-                gap: 3rem;
+            
+            .complete>a {
+                border: 2px solid black;
+                padding: 0.7rem;
+                font-size: 14px;
+                font-weight: bold;
+                text-decoration: none;
+                font-family:Arial, Helvetica, sans-serif;
             }
+            .button>a {
+                border: 2px solid black;
+                padding: 0.7rem;
+                font-size: 14px;
+                font-weight: bold;
+                text-decoration: none;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+
+            
+
+
+           
+
+            
         
         
     </style>
@@ -133,6 +131,7 @@
 
     <div class="container">
         <div class="cont1">
+       
             <form method="POST" action="{% url 'add' %}">
                 {% csrf_token %}
                 <input type="text" name="add" id="name">
@@ -146,20 +145,24 @@
 
         
         <div class="cont2">
-            <ul>
-                {% for t in todo %}
-                <li><div class="{{t.2}}">{{ t.0 }}</div>
-                    <div class="btn">
-                        <span class="complete"><a href="{% url 'completed' id=t.1 %}">comp</a></span>
-                        <span class="button">
-                            <a href="{% url 'delete' id=t.1 %}">DELETE</a>
-                        </span>
-                    </div>
+            {% for t in todo %}
+            <div class="card">
+                <ul>
                     
-                </li>
-                {% endfor %}
-            </ul>
+                    <li>
+                        <div class="{{t.2}}">{{ t.0 }}</div>
+                        <div class="btn">
+                            <span class="complete"><a href="{% url 'completed' id=t.1 %}">COMPLETE</a></span>
+                            <span class="button">
+                                <a href="{% url 'delete' id=t.1 %}">DELETE</a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
         </div>
+        
     </div>
     
 </body>
