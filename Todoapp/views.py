@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from .models import Todo
+from bs4 import BeautifulSoup
 
 # Create your views here.
-
-
-def Todos(request):
+def fetching_data():
     todo =  Todo.objects.all().values()
     List = []
     for t in todo:
-        List.append((t["content"],t["id"]))
+        List.append((t["content"],t["id"], t["mark"]))
     content ={"todo": List}
+    return content
+
+def Todos(request):
+    content = fetching_data()
     return render(request, 'Todo.html', content)
 
 def delete(request, id):
@@ -27,3 +30,10 @@ def Add(request):
             todo.save()
 
     return redirect("Todo")
+
+
+def markAsCompleted(request, id):
+    todo = Todo.objects.get(id=id)
+    todo.mark = True
+    todo.save()
+    return redirect('Todo')

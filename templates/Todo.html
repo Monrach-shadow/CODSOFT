@@ -89,12 +89,40 @@
             font-weight: bold;
             font-size: 14px;
         }
+        .complete{
+            
+            padding-top:1rem ;
+            border: 1px solid #4BB543;
+            text-align: center;
+            width: 70px;
+            height: 30px;
+            background-color: #4BB543;
+            display: block;
+            
+        }
+
+        .complete>a{
+            display: block;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+        }
         
 
             .cont1 {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
+            }
+
+            .True {
+                text-decoration: line-through;
+            }
+            .btn {
+                display: flex;
+                justify-content: space-between;
+                gap: 3rem;
             }
         
         
@@ -120,10 +148,13 @@
         <div class="cont2">
             <ul>
                 {% for t in todo %}
-                <li>{{ t.0 }}
-                    <span class="button">
-                        <a href="{% url 'delete' id=t.1 %}">DELETE</a>
-                    </span>
+                <li><div class="{{t.2}}">{{ t.0 }}</div>
+                    <div class="btn">
+                        <span class="complete"><a href="{% url 'completed' id=t.1 %}">comp</a></span>
+                        <span class="button">
+                            <a href="{% url 'delete' id=t.1 %}">DELETE</a>
+                        </span>
+                    </div>
                     
                 </li>
                 {% endfor %}
