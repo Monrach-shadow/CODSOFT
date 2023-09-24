@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .h1 {
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            word-spacing: 1rem;
+            letter-spacing: 0.7rem;
+            font-size: 45px;
+        }
+
+        body {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #ebefef;
+        }
+        .container{
+            background-color: beige;
+            display: flex;
+            flex-direction: column;
+            
+            
+            padding: 3rem;
+           
+           
+        }
+        .cont1>form>input[type=text] {
+            width: 30vw;
+            height: 30px;
+            border: none;
+        }
+        .button1>button{
+            
+            width: 60px;
+            height: 30px;
+            border: none;
+            background-color: black;
+            color: yellow;
+            font-weight: bold;
+        }
+
+        ul {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 0.5px solid black;
+            text-transform: uppercase;
+            color: black;
+            font-weight: bold;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        .button{
+            
+            padding-top:1rem ;
+            border: 1px solid black;
+            text-align: center;
+            width: 70px;
+            height: 30px;
+            background-color: red;
+            display: block;
+            
+        }
+
+        .button>a{
+            display: block;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+
+            .cont1 {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+        
+        
+    </style>
+    <div class="h1">
+        <h1>TODO APP</h1>
+    </div>
+
+    <div class="container">
+        <div class="cont1">
+            <form method="POST" action="{% url 'add' %}">
+                {% csrf_token %}
+                <input type="text" name="add" id="name">
+                <span class="button1">
+                    <button type="submit">add</button>
+                </span>
+            </form>
+            
+        </div>
+        
+
+        
+        <div class="cont2">
+            <ul>
+                {% for t in todo %}
+                <li>{{ t.0 }}
+                    <span class="button">
+                        <a href="{% url 'delete' id=t.1 %}">DELETE</a>
+                    </span>
+                    
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>
