@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Todoapp.views import Todos, delete, Add,markAsCompleted
+from django.conf.urls.static import static
+from django.conf import settings
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +29,6 @@ urlpatterns = [
     path('Add/', Add, name="add"),
     path('done/<int:id>/', markAsCompleted, name="completed"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
