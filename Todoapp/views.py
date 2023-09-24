@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Todo
-from bs4 import BeautifulSoup
+
 
 # Create your views here.
 def fetching_data():
