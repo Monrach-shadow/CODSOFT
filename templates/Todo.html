@@ -12,26 +12,29 @@
 </head>
 <body>
     <style>
-        
+        body {
+            background-image: url("{% static 'iiii.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
         .h1 {
-            color: orangered;
+            color: #ebefef;
             font-weight: bold;
             text-align: center;
+            margin-top: 6rem;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             word-spacing: 1rem;
             letter-spacing: 0.7rem;
             font-size: 45px;
         }
 
-        body {
+        .body {
             
             display: flex;
             justify-content: center;
             flex-direction: column;
-            background-color: #ebefef;
-            background-image: url("{% static '360_F_589740040_BzYqjC2Lt9SgDPHx2i1UkW6dBqUjvOMC.jpg' %}");
-            background-repeat: no-repeat;
-            background-size: cover;
+            
+            
 
         }
 
@@ -54,10 +57,12 @@
 
         .card {
             width: 90vw;
-            height: 10vh;
+            height: 8vh;
             border: none;
+            border-radius: 10px;
             background-color: #ced4da;
-            box-shadow: 2px 2px #222;
+            box-shadow: 5px 5px #222;
+            background-color: white;
             
         }
         ul {
@@ -107,25 +112,30 @@
                 text-decoration: line-through;
             }
             
+            .True-li {
+                background-color:  #61b33b;
+            }
+            
             .complete>a {
                 border: 2px solid black;
                 padding: 0.7rem;
-                border-radius: 20px;
-                background-color: black;
+                
             }
             .button>a {
                 border: 2px solid black;
                 padding: 0.7rem;
-                border-radius: 20px;
-                background-color: black;
+                
+                
             }
+            
 
-            .fa-xmark{
-                color: red;
+            .fa-trash{
+                color: black;
+                
             }
 
             .fa-check{
-                color: #4BB543;
+                color: black;
             }
 
             #text {
@@ -146,43 +156,44 @@
         
     </style>
     <div class="h1">
-        <h1>TODO APP</h1>
+        <h1>DAILY TASK</h1>
     </div>
+    <div class="body">
+        <div class="container">
+            <div class="cont1">
+        
+                <form method="POST" action="{% url 'add' %}">
+                    {% csrf_token %}
+                    <input type="text" name="add" id="name">
+                    <span class="button1">
+                        <button type="submit"><i class="fa-sharp fa-solid fa-plus"></i></button>
+                    </span>
+                </form>
+                
+            </div>
+            
 
-    <div class="container">
-        <div class="cont1">
-       
-            <form method="POST" action="{% url 'add' %}">
-                {% csrf_token %}
-                <input type="text" name="add" id="name">
-                <span class="button1">
-                    <button type="submit"><i class="fa-sharp fa-solid fa-plus"></i></button>
-                </span>
-            </form>
+            
+            <div class="cont2">
+                {% for t in todo %}
+                <div class="card {{t.2}}-li">
+                    <ul>
+                        
+                        <li >
+                            <div class="{{t.2}}" id="text">{{ t.0 }}</div>
+                            <div class="btn">
+                                <span class="complete"><a href="{% url 'completed' id=t.1 %}"><i class="fa-solid fa-check"></i></a></span>
+                                <span class="button">
+                                    <a href="{% url 'delete' id=t.1 %}"><i class="fa-solid fa-trash"></i></a>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
             
         </div>
-        
-
-        
-        <div class="cont2">
-            {% for t in todo %}
-            <div class="card">
-                <ul>
-                    
-                    <li>
-                        <div class="{{t.2}}" id="text">{{ t.0 }}</div>
-                        <div class="btn">
-                            <span class="complete"><a href="{% url 'completed' id=t.1 %}"><i class="fa-solid fa-check"></i></a></span>
-                            <span class="button">
-                                <a href="{% url 'delete' id=t.1 %}"><i class="fa-sharp fa-solid fa-xmark"></i></a>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            {% endfor %}
-        </div>
-        
     </div>
     
 </body>
