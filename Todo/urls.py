@@ -23,8 +23,8 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('Todo/', Todos, name="Todo"),
+    #path('admin/', admin.site.urls),
+    path('', Todos, name="Todo"),
     path('delete/<int:id>', delete, name="delete"),
     path('Add/', Add, name="add"),
     path('done/<int:id>/', markAsCompleted, name="completed"),
