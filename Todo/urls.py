@@ -30,5 +30,3 @@ urlpatterns = [
     path('done/<int:id>/', markAsCompleted, name="completed"),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_DIR)
